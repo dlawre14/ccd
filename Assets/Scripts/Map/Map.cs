@@ -14,12 +14,19 @@ public class Map : MonoBehaviour {
 
     public Dictionary<VectorInt, MapBlock> map;
 
-    public GameObject block;
-
 	void Start () {
         map = new Dictionary<VectorInt, MapBlock>();
-
-        Instantiate(block);
 	}
+
+    //Sets up the map in the Dictionary
+    void Setup()
+    {
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Map Block");
+
+        foreach (GameObject b in blocks)
+        {
+            map.Add(b.GetComponent<MapBlock>().getPosition(), b.GetComponent<MapBlock>());
+        }
+    }
 
 }

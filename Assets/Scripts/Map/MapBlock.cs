@@ -25,7 +25,8 @@ public class MapBlock : MonoBehaviour {
 
     public void Start()
     {
-
+        position = new VectorInt(transform.position);
+        elevation = position.y;
     }
 
     public VectorInt getPosition()
