@@ -6,9 +6,6 @@ using System.Collections;
 
 public abstract class CCD_Obj : MonoBehaviour {
 
-    //This is the root click handler and handles when an object is right clicked
-    //It does not work in the root class
-    public abstract void OnReceiveClick();
-    public abstract void OnReceiveInteract();
+//This class exists just to allow containment
 
 }

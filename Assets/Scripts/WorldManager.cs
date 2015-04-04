@@ -7,15 +7,70 @@ using System.Collections.Generic;
 
 public class WorldManager : MonoBehaviour {
 
-    private List<CCD_Obj> world_objs;
+    private Avatar avatar;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
+    private Vector3 _activeClickPos;
+
+    //This method handles clicking in the world
+    //If this returns null we did not click anything
+
+    private GameObject ClickWorld()
+    {
+        Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(r, out hit, 1000))
+        {
+            _activeClickPos = hit.point;
+            return hit.transform.gameObject;
+        }
+
+        return null;
+    }
+
+    void Start()
+    {
+        CheckAvatarStatus();
+        StartCoroutine(CheckAvatarTick());
+    }
+
 	void Update () {
-	
+        if (Input.GetMouseButtonDown(1) && avatar != null)
+        {
+            GameObject activeObj = ClickWorld();
+            if (activeObj != null)
+            {
+                Debug.Log("Clicked something");
+                Firewall f;
+                Ground g;
+                //If a firewall...
+                if ((f = activeObj.GetComponent<Firewall>()) != null)
+                {
+                    //Call move to and attack on avatar
+                }
+
+                //If ground...
+                if ((g = activeObj.GetComponent<Ground>()) != null)
+                {
+                    Debug.Log("Hit ground");
+                    avatar.MoveLocation(_activeClickPos);
+                }
+
+                //If an enemy unit...
+            }
+        }
 	}
+
+    public void CheckAvatarStatus()
+    {
+            avatar = FindObjectOfType<Avatar>();
+    }
+
+    //Note: this is a backup in case other scripts fail to update the agent's status
+    private IEnumerator CheckAvatarTick()
+    {
+        while (true) {
+            yield return new WaitForSeconds(3);
+            CheckAvatarStatus();
+        }
+    }
 }

@@ -4,25 +4,23 @@ using System.Collections;
 public class Firewall : CCD_Obj {
 
     private float health_curr;
-    private float health_max;
+    public float health_max;
 
 	// Use this for initialization
 	void Start () {
-	
+        health_curr = health_max;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (health_curr <= 0)
+        {
+            Destroy(gameObject);
+        }
 	}
 
-    public override void OnReceiveClick()
+    public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();   
-    }
-
-    public override void OnReceiveInteract()
-    {
-        throw new System.NotImplementedException();
+        health_curr -= damage;
     }
 }
