@@ -3,12 +3,9 @@ using System.Collections;
 
 public class Firewall : CCD_Obj {
 
-    private float health_curr;
-    public float health_max;
-
 	// Use this for initialization
 	void Start () {
-        health_curr = health_max;
+
 	}
 	
 	// Update is called once per frame
@@ -18,9 +15,5 @@ public class Firewall : CCD_Obj {
             Destroy(gameObject);
         }
 	}
-
-    public void TakeDamage(float damage)
-    {
-        health_curr -= damage;
-    }
 }
+ 
