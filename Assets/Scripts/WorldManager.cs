@@ -39,13 +39,13 @@ public class WorldManager : MonoBehaviour {
             GameObject activeObj = ClickWorld();
             if (activeObj != null)
             {
-                Debug.Log("Clicked something");
                 Firewall f;
                 Ground g;
                 //If a firewall...
                 if ((f = activeObj.GetComponent<Firewall>()) != null)
                 {
-                    //Call move to and attack on avatar
+                    Debug.Log("Hit firewall");
+                    avatar.SetTarget(activeObj);
                 }
 
                 //If ground...
