@@ -8,6 +8,7 @@ public abstract class CCD_Obj : MonoBehaviour {
 
     protected float health_curr;
     public float health_max;
+    public float vertOffset;
 
     public Font labelFont;
 
@@ -16,6 +17,14 @@ public abstract class CCD_Obj : MonoBehaviour {
 
     protected void Start() {
         health_curr = health_max;
+        canvas = FindObjectOfType<WorldManager>().overlayCanvas;
+
+        label = new GameObject(gameObject.name + " Label");
+        label.transform.SetParent(canvas.GetComponent<RectTransform>());
+        Text t = label.AddComponent<Text>();
+        t.text = gameObject.name;
+        t.font = labelFont;
+        t.alignment = TextAnchor.MiddleCenter;
     }
 
     protected void Update()
@@ -24,6 +33,14 @@ public abstract class CCD_Obj : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        Vector3 p = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        label.GetComponent<RectTransform>().position = p + Vector3.up * p.z;
+    }
+
+    protected void OnDestroy()
+    {
+        Destroy(label);
     }
 
     public void TakeDamage(float damage)

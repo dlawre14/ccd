@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class WorldManager : MonoBehaviour {
 
+    public GameObject overlayCanvas;
+
     private Avatar avatar;
 
     private Vector3 _activeClickPos;
