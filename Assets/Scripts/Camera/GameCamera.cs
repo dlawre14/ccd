@@ -4,15 +4,21 @@ using System.Collections;
 public class GameCamera : MonoBehaviour {
 
     //This is the player
-    private GameObject avatar;
+    public float xoffset;
+    public float yoffset;
+    public float zoffset;
+    private GameObject followTarget;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
+    public void SetFollow(GameObject target)
+    {
+        followTarget = target;
+    }
+
+    void LateUpdate()
+    {
+        if (followTarget != null)
+        {
+            gameObject.transform.position = followTarget.transform.position + new Vector3(xoffset, yoffset, zoffset);
+        }
+    }
 }

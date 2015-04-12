@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class WorldManager : MonoBehaviour {
 
     public GameObject overlayCanvas;
+    public GameCamera gc;
 
     private Avatar avatar;
 
@@ -64,7 +65,11 @@ public class WorldManager : MonoBehaviour {
 
     public void CheckAvatarStatus()
     {
-            avatar = FindObjectOfType<Avatar>();
+        avatar = FindObjectOfType<Avatar>();
+        if (avatar != null && gc != null)
+        {
+            gc.SetFollow(avatar.gameObject);
+        }
     }
 
     //Note: this is a backup in case other scripts fail to update the agent's status
