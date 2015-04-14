@@ -17,6 +17,17 @@ public class PlayerCharacter : BaseCharacter {
 	void Update () {
         base.Update();
 
+        Vector3 mp = Input.mousePosition;
+        Ray r = Camera.main.ScreenPointToRay(mp);
+        RaycastHit hit;
+
+        if (Physics.Raycast(r, out hit, 1000, 1<<10))
+        {
+            Debug.DrawLine(transform.position, hit.point);
+            transform.LookAt(hit.point);
+            transform.rotation = Quaternion.Euler(transform.eulerAngles - new Vector3(transform.eulerAngles.x, 0, 0));
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
             cc.Move(Vector3.forward * Time.deltaTime);

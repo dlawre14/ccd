@@ -21,6 +21,14 @@ public class BaseCharacter : MonoBehaviour {
         }
     }
 
+    protected void OnDestroy()
+    {
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+    }
+
     // delta can be positive or negative, we'll allow the accessor to decide
     public void ChangeHealth(float delta)
     {
