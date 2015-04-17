@@ -16,7 +16,8 @@ public class DefenseTower : MonoBehaviour {
         Debug.Log("Entering a collision!");
         if (target == null)
         {
-            target = c.gameObject;
+            if (c.gameObject.GetComponent<BaseCharacter>() != null)
+                target = c.gameObject;
         }
     }
 
