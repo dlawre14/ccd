@@ -4,7 +4,9 @@ using System.Collections;
 [RequireComponent (typeof(CharacterController))]
 public class PlayerCharacter : BaseCharacter {
 
-    CharacterController cc;
+    public GameObject projectile;
+
+    private CharacterController cc;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +25,6 @@ public class PlayerCharacter : BaseCharacter {
 
         if (Physics.Raycast(r, out hit, 1000, 1<<10))
         {
-            Debug.DrawLine(transform.position, hit.point);
             transform.LookAt(hit.point);
             transform.rotation = Quaternion.Euler(transform.eulerAngles - new Vector3(transform.eulerAngles.x, 0, 0));
         }
@@ -46,6 +47,11 @@ public class PlayerCharacter : BaseCharacter {
         if (Input.GetKey(KeyCode.A))
         {
             cc.Move(-Vector3.right * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Instantiate(projectile, transform.position, transform.rotation);
         }
     }
 }
