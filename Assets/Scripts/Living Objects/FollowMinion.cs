@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(NavMeshAgent))]
-public class FollowMinion : BaseCharacter {
+public class FollowMinion : BaseMinion {
 
     public GameObject target;
     private NavMeshAgent agent;
